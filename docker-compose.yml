@@ -10,6 +10,7 @@ version: "3.8"
 services:
   database:
     container_name: wp-database-mariadb
+    platform: linux/x86_64
     image: mariadb:10.6.4-focal
     restart: unless-stopped
     ports:
@@ -29,6 +30,7 @@ services:
     depends_on:
       - database
     container_name: wp-phpmyadmin
+    platform: linux/amd64
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
     ports:
@@ -43,6 +45,7 @@ services:
   wordpress:
     depends_on:
       - database
+    platform: linux/arm64/v8
     container_name: wordpress-6.2.2
     image: wordpress:6.2.2-apache
     restart: unless-stopped
@@ -56,6 +59,7 @@ services:
       WORDPRESS_DB_PASSWORD: '${MYSQL_PASSWORD}'
     volumes:
       - ./wp-content:/var/www/html/wp-content
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - wordpress-network
 
