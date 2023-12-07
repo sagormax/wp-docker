@@ -57,9 +57,11 @@ services:
       WORDPRESS_DB_NAME: '${MYSQL_DATABASE}'
       WORDPRESS_DB_USER: '${MYSQL_USER}'
       WORDPRESS_DB_PASSWORD: '${MYSQL_PASSWORD}'
+      WORDPRESS_DEBUG: '${WORDPRESS_DEBUG}'
     volumes:
       - ./wp-content:/var/www/html/wp-content
       - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./conf/wp-cli.phar:/var/www/html/wp-cli.phar
     networks:
       - wordpress-network
 
